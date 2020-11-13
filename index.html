@@ -24,5 +24,81 @@
 <body>
     <!-- 为ECharts准备一个具备大小（宽高）的Dom -->
     <div id="main"></div>
+    <script type="text/javascript">
+        // 基于准备好的dom，初始化echarts实例
+        var myChart = echarts.init(document.getElementById('main'));
+        const xData = [];
+        for (let i = 0; i < 24; i++) {
+          xData.push(i);
+        }
+        setInterval(() => {
+          const data = [];
+          for(let i=0;i<24;i++){
+            data.push(Math.ceil(Math.random() * 10));
+          }
+          var option = {
+            color: '#888888',
+            title: {
+              show: false,
+            },
+            xAxis: {
+              type: 'category',
+              data: [...xData],
+              boundaryGap: false,
+              splitLine: {
+                show: true,
+              },
+              axisTick: {
+                show: false,
+              },
+              axisLine: {
+                lineStyle: {
+                  color: '#888888',
+                },
+              },
+              axisLabel: {
+                color: '#888888',
+                margin: 15,
+              },
+            },
+            yAxis: {
+              type: 'value',
+              boundaryGap: false,
+              splitLine: {
+                show: false,
+              },
+              axisTick: {
+                show: false,
+              },
+              axisLine: {
+                lineStyle: {
+                  color: '#888888',
+                },
+              },
+              axisLabel: {
+                color: '#888888',
+              },
+            },
+            series: [
+              {
+                type: 'line',
+                data: [...data],
+                symbol: 'none',
+                // connectNulls: true,
+              },
+            ],
+            dataZoom: [
+              {
+                type: 'inside',
+                start: 0,
+                end: 50,
+                orient: 'horizontal',
+                zoomLock: true,
+              },
+            ],
+          };
+          myChart.setOption(option);
+        }, 2000);
+    </script>
 </body>
 </html>
